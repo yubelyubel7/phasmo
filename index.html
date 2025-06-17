@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phasmophobia Zacharies Version</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Attempt to force audio playback immediately
+        window.addEventListener('load', function() {
+            // Create both an Audio object and a backup HTML audio element
+            var introSound = new Audio('IMG/intro1.mp3');
+            introSound.volume = 0.5; // Lower volume may help with autoplay
+            
+            // Try multiple play attempts
+            var playAttempt = setInterval(function() {
+                introSound.play()
+                .then(function() {
+                    clearInterval(playAttempt);
+                    console.log("Audio started playing");
+                })
+                .catch(function(error) {
+                    console.log("Autoplay prevented: ", error);
+                });
+            }, 200); // Try every 200ms
+            
+            // Backup method with HTML5 audio element
+            document.body.insertAdjacentHTML('beforeend', 
+                '<audio autoplay playsinline preload="auto" id="backupAudio">' +
+                '<source src="IMG/intro1.mp3" type="audio/mpeg">' +
+                '</audio>');
+        });
+    </script>
+</head>
+<body>
+    <img src="IMG/mission.png" alt="Mission" class="fullpage-image">
+    
+    <div class="start-button-container">
+        <a href="Loading/index.html">
+            <img src="IMG/start1.png" alt="Start Game" class="start-button">
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Van - Phasmophobia Zacharies Version</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .fullpage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .clickable-image-container.addam {
+            position: fixed;
+            z-index: 2;
+            top: 70%;
+            left: 29%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image-container.dario {
+            position: fixed;
+            z-index: 2;
+            top: 70%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image-container.leave {
+            position: fixed;
+            z-index: 2;
+            top: 85%;
+            left: 91%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image {
+            width: 400px; /* Size for addam and dario */
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .leave-image {
+            width: 200px; /* Smaller size for leave button */
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .clickable-image:hover, .leave-image:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Talking animation */
+        @keyframes talking {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(5px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .talking {
+            animation: talking 0.5s infinite;
+        }
+    </style>
+    <script>
+        // Attempt to play van sound on page load
+        window.addEventListener('load', function() {
+            var vanSound = new Audio('../IMG/van1.mp3');
+            vanSound.volume = 0.5;
+            
+            // Try multiple play attempts
+            var playAttempt = setInterval(function() {
+                vanSound.play()
+                .then(function() {
+                    clearInterval(playAttempt);
+                })
+                .catch(function(error) {
+                    console.log("Autoplay prevented: ", error);
+                });
+            }, 200); // Try every 200ms
+        });
+        
+        function playAddamSound() {
+            var addamImg = document.getElementById('addam-img');
+            var audio = new Audio('../IMG/addam1.mp3');
+            
+            // Add talking animation class
+            addamImg.classList.add('talking');
+            
+            // Play the audio
+            audio.play();
+            
+            // Remove animation when audio ends
+            audio.onended = function() {
+                addamImg.classList.remove('talking');
+            };
+            
+            return false; // Prevent default link behavior
+        }
+        
+        function playDarioSound() {
+            var darioImg = document.getElementById('dario-img');
+            var audio = new Audio('../IMG/dario1.mp3');
+            
+            // Add talking animation class
+            darioImg.classList.add('talking');
+            
+            // Play the audio
+            audio.play();
+            
+            // Remove animation when audio ends
+            audio.onended = function() {
+                darioImg.classList.remove('talking');
+            };
+            
+            return false; // Prevent default link behavior
+        }
+    </script>
+</head>
+<body>
+    <img src="../IMG/van.png" alt="Van" class="fullpage-image">
+    
+    <div class="clickable-image-container addam">
+        <a href="#" id="addamvan-link" onclick="return playAddamSound();">
+            <img src="../IMG/addamvan.png" alt="Addam Van" class="clickable-image" id="addam-img">
+        </a>
+    </div>
+    
+    <div class="clickable-image-container dario">
+        <a href="#" id="dariovan-link" onclick="return playDarioSound();">
+            <img src="../IMG/dariovan.png" alt="Dario Van" class="clickable-image" id="dario-img">
+        </a>
+    </div>
+    
+    <div class="clickable-image-container leave">
+        <a href="../Front_House/index.html" id="leavevan-link">
+            <img src="../IMG/leavevan.png" alt="Leave Van" class="leave-image">
+        </a>
+    </div>
+</body>
+</html>

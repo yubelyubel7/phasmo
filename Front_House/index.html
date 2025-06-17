@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front House - Phasmophobia Zacharies Version</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .fullpage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .clickable-image-container {
+            position: fixed;
+            z-index: 2;
+            top: 50%;
+            left: 54%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image-container.dario {
+            position: fixed;
+            z-index: 2;
+            top: 72%;
+            left: 24%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image-container.jurdoor {
+            position: fixed;
+            z-index: 2;
+            top: 72%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image {
+            width: 320px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .enterhouse-image {
+            width: 150px; /* Adjust this value to your preferred size */
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .clickable-image:hover, .enterhouse-image:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Talking animation */
+        @keyframes talking {
+            0% { transform: translateY(0) scale(1.05); }
+            25% { transform: translateY(-5px) scale(1.05); }
+            50% { transform: translateY(0) scale(1.05); }
+            75% { transform: translateY(5px) scale(1.05); }
+            100% { transform: translateY(0) scale(1.05); }
+        }
+        
+        .talking {
+            animation: talking 0.5s infinite;
+        }
+    </style>
+    <script>
+        function playDario2Sound() {
+            var darioImg = document.getElementById('dario-bravo-img');
+            var audio = new Audio('../IMG/dario2.mp3');
+            
+            // Add talking animation class
+            darioImg.classList.add('talking');
+            
+            // Play the audio
+            audio.play();
+            
+            // Remove animation when audio ends
+            audio.onended = function() {
+                darioImg.classList.remove('talking');
+            };
+            
+            return false; // Prevent default link behavior
+        }
+        
+        function playJurSound() {
+            var jurImg = document.getElementById('jur-door-img');
+            var audio = new Audio('../IMG/jur1.mp3');
+            
+            // Add talking animation class
+            jurImg.classList.add('talking');
+            
+            // Play the audio
+            audio.play();
+            
+            // Remove animation when audio ends
+            audio.onended = function() {
+                jurImg.classList.remove('talking');
+            };
+            
+            return false; // Prevent default link behavior
+        }
+    </script>
+</head>
+<body>
+    <img src="../IMG/fronthouse.png" alt="Front House" class="fullpage-image">
+    
+    <div class="clickable-image-container">
+        <a href="../House/index.html">
+            <img src="../IMG/enterhouse.png" alt="Enter House" class="enterhouse-image">
+        </a>
+    </div>
+    
+    <div class="clickable-image-container dario">
+        <a href="#" onclick="return playDario2Sound();">
+            <img src="../IMG/dariobravo.png" alt="Dario Bravo" class="clickable-image" id="dario-bravo-img">
+        </a>
+    </div>
+    
+    <div class="clickable-image-container jurdoor">
+        <a href="#" onclick="return playJurSound();">
+            <img src="../IMG/jurdoor.png" alt="Jur Door" class="clickable-image" id="jur-door-img">
+        </a>
+    </div>
+</body>
+</html>

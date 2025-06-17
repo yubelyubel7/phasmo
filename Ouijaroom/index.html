@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouija Room - Phasmophobia Zacharies Version</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .fullpage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .clickable-image-container {
+            position: fixed;
+            z-index: 2;
+            top: 82%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .ouija-image {
+            width: 360px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .ouija-image:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <img src="../IMG/ouijaroom.png" alt="Ouija Room" class="fullpage-image">
+    
+    <div class="clickable-image-container">
+        <a href="https://youtu.be/tnf5Wbk_1gw" target="_blank">
+            <img src="../IMG/ouija.png" alt="Ouija Board" class="ouija-image" id="ouija-img">
+        </a>
+    </div>
+</body>
+</html>

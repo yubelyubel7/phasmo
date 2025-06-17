@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading - Phasmophobia Zacharies Version</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .fullpage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script>
+        // Redirect to Van/index.html after 6 seconds
+        setTimeout(function() {
+            window.location.href = "../../Van/index.html";
+        }, 7000); // 6000 milliseconds = 6 seconds
+        
+        // Attempt to play loading audio on page load
+        window.addEventListener('load', function() {
+            var loadingSound = new Audio('../../IMG/loading2fma.mp3');
+            loadingSound.volume = 0.5;
+            
+            // Try multiple play attempts
+            var playAttempt = setInterval(function() {
+                loadingSound.play()
+                .then(function() {
+                    clearInterval(playAttempt);
+                    console.log("Loading audio started playing");
+                })
+                .catch(function(error) {
+                    console.log("Autoplay prevented: ", error);
+                });
+            }, 200); // Try every 200ms
+        });
+    </script>
+</head>
+<body>
+    <img src="../../IMG/loading2.png" alt="Loading" class="fullpage-image">
+    <!-- Backup audio element -->
+    <audio id="backupAudio" autoplay playsinline preload="auto" style="display:none;">
+        <source src="../../IMG/loading2fma.mp3" type="audio/mpeg">
+    </audio>
+</body>
+</html>

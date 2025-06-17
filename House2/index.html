@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Interior - Phasmophobia Zacharies Version</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .fullpage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .clickable-image-container {
+            position: fixed;
+            z-index: 2;
+            top: 50%;
+            left: 57%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image-container.dog {
+            position: fixed;
+            z-index: 2;
+            top: 77%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+        .clickable-image {
+            width: 150px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .dog-image {
+            width: 250px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .clickable-image:hover, .dog-image:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Talking animation */
+        @keyframes talking {
+            0% { transform: translateY(0) scale(1.05); }
+            25% { transform: translateY(-5px) scale(1.05); }
+            50% { transform: translateY(0) scale(1.05); }
+            75% { transform: translateY(5px) scale(1.05); }
+            100% { transform: translateY(0) scale(1.05); }
+        }
+        
+        .talking {
+            animation: talking 0.5s infinite;
+        }
+    </style>
+    <script>
+        function playDogSound() {
+            var dogImg = document.getElementById('dog-img');
+            var audio = new Audio('../IMG/whatdadawgdoing.mp3');
+            
+            // Add talking animation class
+            dogImg.classList.add('talking');
+            
+            // Play the audio
+            audio.play();
+            
+            // Remove animation when audio ends
+            audio.onended = function() {
+                dogImg.classList.remove('talking');
+            };
+            
+            return false; // Prevent default link behavior
+        }
+    </script>
+</head>
+<body>
+    <img src="../IMG/house2.png" alt="House Interior" class="fullpage-image">
+    
+    <div class="clickable-image-container">
+        <a href="../SoundboxRoom/index.html">
+            <img src="../IMG/entersoundbox.png" alt="Enter Soundbox Room" class="clickable-image">
+        </a>
+    </div>
+    
+    <div class="clickable-image-container dog">
+        <a href="#" onclick="return playDogSound();">
+            <img src="../IMG/whatdadawg.png" alt="What da dawg doin" class="dog-image" id="dog-img">
+        </a>
+    </div>
+</body>
+</html>
